@@ -7,12 +7,12 @@ import { Users, Activity, Brain, TrendingUp, AlertTriangle, Calendar, FileText, 
 
 // Mock data for dashboard analytics
 const monthlyAnalyses = [
-  { month: "Jan", lung: 45, heart: 32, both: 23 },
-  { month: "Feb", lung: 52, heart: 41, both: 35 },
-  { month: "Mar", lung: 48, heart: 38, both: 42 },
-  { month: "Apr", lung: 61, heart: 45, both: 38 },
-  { month: "May", lung: 55, heart: 52, both: 45 },
-  { month: "Jun", lung: 67, heart: 48, both: 52 },
+  { month: "Jan", ischemia: 45, infarction: 32, normal: 23 },
+  { month: "Feb", ischemia: 52, infarction: 41, normal: 35 },
+  { month: "Mar", ischemia: 48, infarction: 38, normal: 42 },
+  { month: "Apr", ischemia: 61, infarction: 45, normal: 38 },
+  { month: "May", ischemia: 55, infarction: 52, normal: 45 },
+  { month: "Jun", ischemia: 67, infarction: 48, normal: 52 },
 ]
 
 const confidenceScores = [
@@ -33,7 +33,7 @@ const recentActivity = [
   {
     time: "2 hours ago",
     user: "Dr. Sarah Ahmed",
-    action: "Completed lung analysis",
+    action: "Heart analysis",
     result: "Normal",
     icon: CheckCircle,
     color: "text-green-600",
@@ -58,7 +58,7 @@ const recentActivity = [
     time: "8 hours ago",
     user: "Dr. Omar Khalil",
     action: "Lung analysis",
-    result: "Mild opacity detected",
+    result: "infarction",
     icon: AlertTriangle,
     color: "text-yellow-600",
   },
@@ -148,16 +148,16 @@ export default function DashboardPage() {
             <CardContent>
               <ChartContainer
                 config={{
-                  lung: {
-                    label: "Lung Analysis",
+                  ischemia: {
+                    label: "ischemia",
                     color: "hsl(var(--chart-1))",
                   },
-                  heart: {
-                    label: "Heart Analysis",
+                  infarction: {
+                    label: "infarction",
                     color: "hsl(var(--chart-2))",
                   },
-                  both: {
-                    label: "Comprehensive",
+                  normal: {
+                    label: "normal",
                     color: "hsl(var(--chart-3))",
                   },
                 }}
@@ -169,9 +169,9 @@ export default function DashboardPage() {
                     <XAxis dataKey="month" />
                     <YAxis />
                     <ChartTooltip content={<ChartTooltipContent />} />
-                    <Bar dataKey="lung" fill="var(--color-lung)" name="Lung" />
-                    <Bar dataKey="heart" fill="var(--color-heart)" name="Heart" />
-                    <Bar dataKey="both" fill="var(--color-both)" name="Both" />
+                    <Bar dataKey="ischemia" fill="var(--color-ischemia)" name="ischemia" />
+                    <Bar dataKey="infarction" fill="var(--color-infarction)" name="infarction" />
+                    <Bar dataKey="normal" fill="var(--color-normal)" name="normal" />
                   </BarChart>
                 </ResponsiveContainer>
               </ChartContainer>

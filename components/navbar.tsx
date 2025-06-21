@@ -15,14 +15,15 @@ export function Navbar() {
   const handleSignOut = () => {
     signOut()
     router.push("/signin")
+    setIsOpen(false)
   }
 
   return (
-    <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm border-b border-blue-200 z-50">
+    <nav className="relative fixed top-0 w-full bg-white/95 backdrop-blur-sm border-b border-blue-200 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-2" onClick={() => setIsOpen(false)}>
             <div className="relative">
               <Stethoscope className="h-4 w-4 text-blue-800 absolute -bottom-1 -right-1" />
             </div>
@@ -39,7 +40,7 @@ export function Navbar() {
             </button>
           </div>
 
-          {/* Links (desktop) */}
+          {/* Desktop menu */}
           <div className="hidden md:flex items-center space-x-8">
             <Link href="/" className="text-blue-700 hover:text-blue-900 font-medium">Home</Link>
             <Link href="/analysis" className="text-blue-700 hover:text-blue-900 font-medium">Analysis</Link>
@@ -74,27 +75,27 @@ export function Navbar() {
 
         {/* Mobile menu */}
         <div
-          className={`md:hidden flex flex-col items-start gap-4 py-4 transition-all duration-300 ease-in-out ${
-            isOpen ? "opacity-100 max-h-screen" : "opacity-0 max-h-0 overflow-hidden"
+          className={`md:hidden flex flex-col items-start gap-4 transition-all duration-300 ease-in-out overflow-hidden ${
+            isOpen ? "max-h-[500px] opacity-100 translate-y-0" : "max-h-0 opacity-0 -translate-y-2"
           }`}
         >
-          <Link href="/" className="text-blue-700 hover:text-blue-900 font-medium">Home</Link>
-          <Link href="/analysis" className="text-blue-700 hover:text-blue-900 font-medium">Analysis</Link>
-          <Link href="/contact" className="text-blue-700 hover:text-blue-900 font-medium">Contact</Link>
+          <Link href="/" onClick={() => setIsOpen(false)} className="text-blue-700 hover:text-blue-900 font-medium">Home</Link>
+          <Link href="/analysis" onClick={() => setIsOpen(false)} className="text-blue-700 hover:text-blue-900 font-medium">Analysis</Link>
+          <Link href="/contact" onClick={() => setIsOpen(false)} className="text-blue-700 hover:text-blue-900 font-medium">Contact</Link>
           {user ? (
             <>
-              <Link href="/dashboard" className="text-blue-700 hover:text-blue-900 font-medium">Dashboard</Link>
-              <Link href="/profile" className="text-blue-700 hover:text-blue-900 font-medium">Profile</Link>
+              <Link href="/dashboard" onClick={() => setIsOpen(false)} className="text-blue-700 hover:text-blue-900 font-medium">Dashboard</Link>
+              <Link href="/profile" onClick={() => setIsOpen(false)} className="text-blue-700 hover:text-blue-900 font-medium">Profile</Link>
               <Button onClick={handleSignOut} variant="outline" className="w-full text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white">
                 <LogOut className="h-4 w-4 mr-2" /> Sign Out
               </Button>
             </>
           ) : (
             <>
-              <Link href="/signin">
+              <Link href="/signin" onClick={() => setIsOpen(false)}>
                 <Button variant="ghost" className="w-full text-blue-600 hover:text-blue-800">Sign In</Button>
               </Link>
-              <Link href="/register">
+              <Link href="/register" onClick={() => setIsOpen(false)}>
                 <Button className="w-full bg-blue-600 text-white hover:bg-blue-700">Get Started</Button>
               </Link>
             </>

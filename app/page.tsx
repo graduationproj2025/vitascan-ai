@@ -1,39 +1,49 @@
+"use client"
+
 import Link from "next/link"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Heart, Brain, Shield, Zap, Users, Award } from "lucide-react"
 
 export default function HomePage() {
+  const [stats, setStats] = useState({
+    totalAnalyses: 0,
+    avgConfidence: 0
+  })
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/stats")
+      .then(res => res.json())
+      .then(data => {
+        setStats({
+          totalAnalyses: data.totalAnalyses || 0,
+          avgConfidence: data.avgConfidence || 0
+        })
+      })
+      .catch(err => console.error("Failed to fetch stats", err))
+  }, [])
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-blue-600/90 to-blue-800/90 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">Advanced AI Medical Imaging</h1>
-            <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">
-              Revolutionizing heart MPI analysis with cutting-edge artificial intelligence for faster, more
-              accurate medical diagnosis.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/analysis">
-                <Button
-                  size="lg"
-                  className="bg-white text-blue-600 hover:bg-blue-50 hover:scale-105 transition-all duration-200 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl"
-                >
-                  Start Analysis
-                </Button>
-              </Link>
-              <Link href="/register">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-2 border-white text-blue-900 bg-white/90 hover:bg-white hover:text-blue-700 hover:scale-105 transition-all duration-200 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl"
-                >
-                  Get Started
-                </Button>
-              </Link>
-            </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">Advanced AI Medical Imaging</h1>
+          <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">
+            Revolutionizing heart MPI analysis with cutting-edge artificial intelligence for faster, more accurate medical diagnosis.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/analysis">
+              <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-4 text-lg font-semibold shadow-lg">
+                Start Analysis
+              </Button>
+            </Link>
+            <Link href="/register">
+              <Button size="lg" variant="outline" className="border-2 border-white text-blue-900 bg-white/90 px-8 py-4 text-lg font-semibold shadow-lg">
+                Join Vitascan
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -44,8 +54,7 @@ export default function HomePage() {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">Why Choose VitaScan AI?</h2>
             <p className="text-xl text-blue-700 max-w-3xl mx-auto">
-              Our advanced AI technology provides healthcare professionals with powerful tools for accurate and
-              efficient medical imaging analysis.
+              Our advanced AI technology provides healthcare professionals with powerful tools for accurate and efficient medical imaging analysis.
             </p>
           </div>
 
@@ -79,7 +88,7 @@ export default function HomePage() {
                 <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
                   <Shield className="h-6 w-6 text-green-600" />
                 </div>
-                <CardTitle className="text-blue-900">Data Security and Privacy Compliance</CardTitle>
+                <CardTitle className="text-blue-900">Data Security and Privacy</CardTitle>
                 <CardDescription>
                   Our system is designed with strong security measures to protect patient data and ensure user privacy.
                 </CardDescription>
@@ -134,16 +143,16 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-blue-600 mb-2">95%+</div>
+              <div className="text-4xl md:text-5xl font-bold text-blue-600 mb-2">95%</div>
               <div className="text-blue-800 font-medium">Accuracy Rate</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-blue-600 mb-2">500+</div>
+              <div className="text-4xl md:text-5xl font-bold text-blue-600 mb-2">{stats.totalAnalyses}</div>
               <div className="text-blue-800 font-medium">Images Analyzed</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-blue-600 mb-2">200+</div>
-              <div className="text-blue-800 font-medium">Healthcare Partners</div>
+              <div className="text-4xl md:text-5xl font-bold text-blue-600 mb-2">100%</div>
+              <div className="text-blue-800 font-medium">Secure Information</div>
             </div>
             <div className="text-center">
               <div className="text-4xl md:text-5xl font-bold text-blue-600 mb-2">24/7</div>
@@ -158,25 +167,17 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Transform Your Medical Practice?</h2>
           <p className="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
-            Join thousands of healthcare professionals who trust VitaScan AI for accurate and efficient medical imaging
-            analysis.
+            Join thousands of healthcare professionals who trust VitaScan AI for accurate and efficient medical imaging analysis.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link href="/register">
-              <Button
-                size="lg"
-                className="bg-white text-blue-600 hover:bg-blue-50 hover:scale-105 transition-all duration-200 px-10 py-4 text-lg font-bold shadow-xl hover:shadow-2xl rounded-full"
-              >
-                Get Started Now
+              <Button size="lg" className="bg-white text-blue-600 px-10 py-4 text-lg font-bold shadow-xl rounded-full">
+                Join Us NOW!
               </Button>
             </Link>
             <Link href="/contact">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-2 border-white text-blue-900 bg-white/90 hover:bg-white hover:text-blue-700 hover:scale-105 transition-all duration-200 px-10 py-4 text-lg font-bold shadow-xl hover:shadow-2xl rounded-full"
-              >
-                Contact Sales
+              <Button size="lg" variant="outline" className="border-2 border-white text-blue-900 bg-white/90 px-10 py-4 text-lg font-bold shadow-xl rounded-full">
+                Contact Us
               </Button>
             </Link>
           </div>

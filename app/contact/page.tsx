@@ -331,7 +331,7 @@ const handleSubmit = (e: React.FormEvent) => {
                       <h3 className="font-medium text-blue-900">How accurate is VitaScan AI?</h3>
                     </div>
                     <p className="text-sm text-gray-600">
-                      Our AI achieves 99.2% accuracy rate, validated across multiple healthcare institutions and
+                      Our AI achieves 95% accuracy rate, validated across multiple healthcare institutions and
                       thousands of medical images. The system is continuously improved with new data.
                     </p>
                   </div>
@@ -341,8 +341,10 @@ const handleSubmit = (e: React.FormEvent) => {
                       <h3 className="font-medium text-green-900">Is my patient data secure?</h3>
                     </div>
                     <p className="text-sm text-gray-600">
-                      Yes, we are fully HIPAA compliant with enterprise-grade security measures including end-to-end
-                      encryption, secure cloud storage, and strict access controls to protect all patient information.
+                      We use advanced encryption technologies, secure servers, 
+                      and real-time threat monitoring to ensure your data stays safe at every step. 
+                      All information is transmitted and stored using industry best practices for data protection.
+
                     </p>
                   </div>
                   <div className="border-l-4 border-purple-600 pl-4 py-2">
@@ -351,7 +353,7 @@ const handleSubmit = (e: React.FormEvent) => {
                       <h3 className="font-medium text-purple-900">What image formats are supported?</h3>
                     </div>
                     <p className="text-sm text-gray-600">
-                      We support JPEG, PNG, and DICOM formats for chest X-ray analysis. Images should be high-quality
+                      We support all formats for MPI analysis. Images should be high-quality
                       and properly oriented for best results.
                     </p>
                   </div>
